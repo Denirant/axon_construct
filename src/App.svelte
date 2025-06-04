@@ -12,7 +12,7 @@
         "
         />
         <div
-            class="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(60vh,transparent_10%,black)]"
+            class="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(60vh,transparent_10%,black)] sm:[mask-image:radial-gradient(60vw,transparent_10%,black)]"
         />
         <div class="flex flex-col justify-between py-7.5 items-center h-screen">
             <p
