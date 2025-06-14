@@ -61,7 +61,7 @@
 </script>
 
 <main
-    class="h-screen w-full text-gray-900 flex flex-col justify-center items-center px-4 sm:px-6 relative"
+    class="h-screen w-screen overflow-hidden text-gray-900 flex flex-col justify-center items-center px-4 sm:px-6 relative"
 >
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
