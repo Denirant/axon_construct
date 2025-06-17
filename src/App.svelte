@@ -592,10 +592,10 @@
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="relative">
                       <!-- Динамический iOS Activity Indicator -->
-                      <div class="relative w-5 h-5">
+                      <div class="relative w-6 h-6 left-3">
                         {#each lines as line, i}
                           <div 
-                            class="absolute w-0.5 h-1.75 bg-gray-600 rounded-sm origin-center animate-ios-fade" 
+                            class="absolute w-0.5 h-1.75 bg-gray-400 rounded-sm origin-center animate-ios-fade" 
                             style="transform: rotate({line.angle}deg); animation-delay: {line.delay}s; transform-origin: center {radius}px;"
                           ></div>
                         {/each}
