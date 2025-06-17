@@ -25,6 +25,18 @@
     let newsletterEmail = "";
     let newsletterSuccess = false;
 
+    export let lineCount = 10;
+    export let radius = 12;
+    export let animationDuration = 1.2;
+    
+    $: stepAngle = 360 / lineCount;
+    $: delayStep = animationDuration / lineCount;
+    
+    $: lines = Array.from({ length: lineCount }, (_, i) => ({
+      angle: i * stepAngle,
+      delay: -(i * delayStep)
+    }));
+  
     // Content data
     const demoModes = [
         {
@@ -440,21 +452,20 @@
     <div class="blob blob-4"></div>
 
     <!-- Header -->
-    <header
+    <!-- <header
         class="fixed top-0 z-50 transition-all duration-300 ease-out {currentState.isScrolled
             ? 'bg-white/60 backdrop-blur-sm border border-gray-50 mt-3 mx-3 w-[calc(100%-1.5rem)] rounded-4xl'
             : 'rounded-none border-gray-50/0 bg-transparent w-full'}"
     >
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <div
                     class="flex items-center space-x-3 group cursor-pointer"
                     on:click={() =>
                         window.scrollTo({ top: 0, behavior: "smooth" })}
                 >
                     <div
-                        class="size-9 bg-gray-200/80 p-0.5 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform"
+                        class="size-8 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform"
                     >
                         <img src="./favicon.png" alt="" />
                     </div>
@@ -465,7 +476,6 @@
                     </span>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-7">
                     <button
                         on:click={() => scrollToSection("features")}
@@ -500,7 +510,6 @@
                     </div>
                 </div>
 
-                <!-- Mobile menu button -->
                 <button
                     class="md:hidden p-2 rounded-2xl text-neutral-500 hover:text-neutral-800 hover:bg-white/40 border border-transparent hover:border-neutral-50/50 cursor-pointer duration-200 transition-colors"
                     on:click={() =>
@@ -517,7 +526,6 @@
                 </button>
             </div>
 
-            <!-- Mobile Navigation -->
             {#if currentState.mobileMenuOpen}
                 <div
                     class="md:hidden p-2 absolute top-18 right-4 w-60 rounded-3xl border-gray-200 bg-white backdrop-blur-xl"
@@ -554,7 +562,7 @@
                 </div>
             {/if}
         </nav>
-    </header>
+    </header> -->
 
     <!-- Hero Section -->
     <section
@@ -567,24 +575,37 @@
                 class="flex flex-col items-center justify-center h-full text-center max-w-5xl py-2"
             >
                 <!-- Main headline -->
-                <h1
+                <!-- <h1
                     class="text-3xl md:text-5xl font-bold text-neutral-800 tracking-tight mb-8 observe"
                 >
                     <span class=""> Axon Studio Dev </span>
-                </h1>
+                </h1> -->
 
-                <p
+                <!-- <p
                     class="absolute w-94 left-1/2 -translate-x-1/2 bottom-20 bg-red-50/50 px-4 py-1.5 rounded-2xl border border-red-100/50 text-red-500/80 font-medium text-[14px] mt-4 tracking-wide flex items-center gap-1.5"
                 >
                     <ShieldX
                         class="size-4.5 text-red-500/80 fill-red-100/80"
                         stroke-width={1.5}
                     /> Toolchain init failed, see `/var/mcp/query.log`
-                </p>
+                </p> -->
+                <div class="flex items-center justify-center min-h-screen">
+                    <div class="relative">
+                      <!-- Динамический iOS Activity Indicator -->
+                      <div class="relative w-5 h-5">
+                        {#each lines as line, i}
+                          <div 
+                            class="absolute w-0.5 h-1.75 bg-gray-600 rounded-sm origin-center animate-ios-fade" 
+                            style="transform: rotate({line.angle}deg); animation-delay: {line.delay}s; transform-origin: center {radius}px;"
+                          ></div>
+                        {/each}
+                      </div>
+                    </div>
+                  </div>
                 <p
                     class="absolute bottom-4 text-xs text-gray-500 font-mono tracking-tight"
                 >
-                    Release 0.13.4.b
+                    Release 0.14.0.b
                 </p>
             </div>
         </div>
@@ -643,7 +664,7 @@
     .blob {
         position: absolute;
         border-radius: 50%;
-        opacity: 0.3;
+        opacity: 0.2;
         mix-blend-mode: screen;
         filter: blur(100px);
         animation: morph 25s ease-in-out infinite alternate;
@@ -707,5 +728,16 @@
             transform: scale(1) translate(-20px, 0px) rotate(180deg);
             border-radius: 42% 58% 67% 33% / 33% 33% 67% 67%;
         }
+    }
+
+
+
+    .animate-ios-fade {
+      animation: ios-fade var(--duration, 1.2s) linear infinite;
+    }
+    
+    @keyframes ios-fade {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
     }
 </style>
